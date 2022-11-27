@@ -193,19 +193,18 @@ async function run() {
             const query = { userType: "Seller" };
             const result = await usersCollection.find(query).toArray();
             res.send(result);
-        })
+        });
+
         app.delete('/buyer/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await usersCollection.deleteOne(query)
             res.send(result);
-        })
-
+        });
 
         app.get('/reportedProducts', async (req, res) => {
             const query = { report: 'Reported' };
             const result = await productsCollection.find(query).toArray();
-            console.log(result);
             res.send(result);
 
         });
@@ -216,8 +215,6 @@ async function run() {
             const result = await productsCollection.deleteOne(query);
             res.send(result);
         })
-
-
 
 
 
