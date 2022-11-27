@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-require('dotenv').config();
 const cors = require('cors');
 const jwt = require("jsonwebtoken");
 const { sign } = require('jsonwebtoken');
+require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const port = process.env.PORT || 5000;
 
@@ -58,14 +58,14 @@ async function run() {
         app.get('/category', async (req, res) => {
             const query = {};
             const result = await categoryCollection.find(query).toArray();
-            res.send(result)
+            res.send(result);
         });
 
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
             let query = { categoryId: parseInt(id) };
             const results = await productsCollection.find(query).toArray();
-            res.send(results)
+            res.send(results);
         });
 
 
@@ -79,7 +79,7 @@ async function run() {
                 },
             };
             const result = await productsCollection.updateOne(filter, updateDoc, options);
-            res.send(result)
+            res.send(result);
         });
 
         app.put('/reportseller/:id', async (req, res) => {
@@ -92,7 +92,7 @@ async function run() {
                 },
             };
             const result = await usersCollection.updateOne(filter, updateDoc, options);
-            res.send(result)
+            res.send(result);
         });
 
 
@@ -175,7 +175,7 @@ async function run() {
         app.get('/seller', async (req, res) => {
             const query = { userType: "Buyer" };
             const result = await usersCollection.find(query).toArray();
-            res.send(result)
+            res.send(result);
         });
 
         app.delete('/seller/:id', async (req, res) => {
@@ -192,17 +192,13 @@ async function run() {
         app.get('/buyer', async (req, res) => {
             const query = { userType: "Seller" };
             const result = await usersCollection.find(query).toArray();
-            res.send(result)
+            res.send(result);
         })
         app.delete('/buyer/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id);
             const query = { _id: ObjectId(id) };
             const result = await usersCollection.deleteOne(query)
-            console.log(result);
             res.send(result);
-
-
         })
 
 
